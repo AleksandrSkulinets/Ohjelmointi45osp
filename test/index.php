@@ -9,8 +9,12 @@ require 'header.php';
 <p>Some greeting message</p>
 <?php require 'config.php'; ?>
 <?php
-$statment = $pdo->query("SELECT ProductID, ProductName, Description, Price, ImageURL FROM products");
-    $products = $statment->fetchAll(PDO::FETCH_ASSOC); 
+    // $statment = $pdo->query("SELECT ProductID, ProductName, Description, Price, ImageURL FROM products"); // All products
+    // $products = $statment->fetchAll(PDO::FETCH_ASSOC); 
+    ?>
+    <?php
+        $statment = $pdo->query("SELECT ProductID, ProductName, Description, Price, ImageURL FROM products ORDER BY RAND() LIMIT 5"); //5 random products
+        $products = $statment->fetchAll(PDO::FETCH_ASSOC);
     ?>
 
 <div class="product-cards">
