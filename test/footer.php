@@ -7,6 +7,7 @@
         <ul>
             <li><a href="index.php">Home</a></li>
             <li><a href="cart.php">Cart</a></li>
+            <li><a href="user.php">MemberArea</a></li>
         </ul>
     </nav>
 </footer>

@@ -68,22 +68,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'], $_POST
     } else {
         // Display image for a cart with items and show the number of products
         echo '<a href="cart.php"><img src="images/cartfull.png" alt="Cart with items"></a>';
-        echo '<span>' . getCartItemCount() . '</span>';
+        echo '<span class="cart">' . getCartItemCount() . '</span>';
     }
     ?>
         </li>
         <li>
         <?php 
         
-        $userIsNotLogin = empty($_SESSION['user_id']);
+        $userIsNotLogin = empty($_SESSION['user']);
 
         if ($userIsNotLogin) {
         // Display image for not logged in user
-         echo '<a href="login.php"><img src="images/user.png" alt="user"></a>';
+         echo '<a href="user.php"><img src="images/user.png" alt="user"></a>';
         } else {
         // Display image for logged in user and logout link
         echo '<a href="user.php"><img src="images/user-login.png" alt="User is logged in"></a>';
-        echo '<span>' . '</span>';
+        echo '<span class="logout"><a href="logout.php">Logout</a></span>';
         } 
         ?>
         </li>
