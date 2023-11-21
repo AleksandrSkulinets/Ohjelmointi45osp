@@ -2,6 +2,7 @@
 // include header
 require 'header.php';
 ?>
+<main>
 <?php
 // Include database config and create a PDO 
 include('config.php');
@@ -30,7 +31,7 @@ if (isset($_GET['search'])) {
             }
             echo "</div>";
         } else {
-            echo "<h1>No results for '$search'</h1>";
+            echo "<h1>No results for" . htmlentities($search, ENT_QUOTES, 'UTF-8') . "</h1>"; // convert to htmlentities
         }
     } else {
         echo "<h1>Search must be at least 3 characters long.</h1>";
@@ -39,7 +40,10 @@ if (isset($_GET['search'])) {
     echo "Please enter a product name.";
 }
 ?>
+</main>
 <?php
 // include footer
 require 'footer.php';
 ?>
+</body>
+</html>

@@ -5,6 +5,7 @@ require 'header.php';
 <?php
 include 'config.php';
 ?>
+<main>
 <?php
 // Initialize the selected product as null
 $selectedProduct = null;
@@ -13,7 +14,7 @@ $selectedProduct = null;
 if (isset($_GET['id'])) {
     $productID = $_GET['id'];
 
-    // Create a prepared statement to retrieve the product with the given ProductID
+    // prepared statement to retrieve the product with the given ProductID
     $statment = $pdo->prepare("SELECT ProductID, ProductName, Description, Price, ImageURL FROM products WHERE ProductID = :productID");
     $statment->bindParam(':productID', $productID, PDO::PARAM_INT);
     $statment->execute();
@@ -21,7 +22,7 @@ if (isset($_GET['id'])) {
     // Fetch the product data
     $selectedProduct = $statment->fetch(PDO::FETCH_ASSOC);
 
-    // Display product details if a product was found
+    // Display product details if product was found
     if ($selectedProduct !== false) {
         echo "<div class='product-details'>";
         echo "<h1>" . $selectedProduct['ProductName'] . "</h1>";
@@ -37,15 +38,17 @@ if (isset($_GET['id'])) {
         echo '</form>';
         echo "</div>";
     } else {
-        echo "Product not found.";
+        echo "<h2>Product not found.</h2>";
     }
 } else {
-    echo "No product selected.";
+    echo "<h2>No product selected.</h2>";
 }
 
 ?>
-
+</main>
 <?php
 // include footer
 require 'footer.php';
 ?>
+</body>
+</html>

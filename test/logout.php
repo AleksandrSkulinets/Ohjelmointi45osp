@@ -1,8 +1,9 @@
 <?php
 session_start(); 
 if (isset($_SESSION['user'])) {
-    // Unset the session key user
+    // Unset the session user
     unset($_SESSION['user']);
+
 }
 
 // Redirect to the index page

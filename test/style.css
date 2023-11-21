@@ -72,9 +72,10 @@ main {
     padding: 20px;
 }
 
-main h1 {
-    margin: 50px auto 50px auto;
+main h1,h2,h3{
+    margin: 40px auto 40px auto;
 }
+
 main p  {
     margin: 30px auto 30px auto;
 }
@@ -128,7 +129,6 @@ footer img {
     margin: 5px 0;
 }
 
-/* Search Form */
 .search {
     margin: 75px 50px auto auto;
 }
@@ -151,7 +151,6 @@ footer img {
     outline: none;
 }
 
-/* Search Button */
 .search button {
     background: #007bff;
     color: #fff;
@@ -166,7 +165,6 @@ footer img {
     background: #0056b3;
 }
 
-/* Styles for single-product page */
 .product-details {
     margin: 20px;
     padding: 20px;
@@ -210,7 +208,6 @@ footer img {
     background-color: #FF8800;
 }
 
-/* Cart tables */
 table {
     width: 75%;
     border-collapse: collapse;
@@ -225,7 +222,11 @@ th, td {
     padding: 8px;
     text-align: left;
 }
-
+td img{
+    max-width: 150px;
+    max-height: auto;
+    margin: auto;
+}
 th {
     background-color: #f2f2f2;
 }
@@ -237,12 +238,15 @@ tr:nth-child(even) {
 tr:nth-child(odd) {
     background-color: #fff;
 }
-
+table tr td.orderitems
+{
+ text-align:left;
+ font-size: 12px;
+}
 p {
     margin: 10px 0;
 }
 
-/* Cart Form and Button */
 .cart-count {
     margin-left: auto;
 }
@@ -251,19 +255,7 @@ p {
     margin: 20px auto 20px auto;
 }
 
-.cart-form input[type="submit"][name="empty_cart"] {
-    align-self: center;
-    background-color: #FF8800;
-    color: #fff;
-    padding: 10px 10px;
-    border: none;
-    cursor: pointer;
-    text-align: right;
-}
-
-.cart-form input[type="submit"][name="empty_cart"]:hover {
-    background-color: #ff0000;
-}
+.cart-form input[type="submit"][name="empty_cart"],
 .cart-form input[type="submit"][name="make_order"] {
     align-self: center;
     background-color: #FF8800;
@@ -273,24 +265,27 @@ p {
     cursor: pointer;
     text-align: right;
 }
+
+.cart-form input[type="submit"][name="empty_cart"]:hover,
 .cart-form input[type="submit"][name="make_order"]:hover {
     background-color: #ff0000;
 }
 
 .custom-form {
     background: #FFF;
-    border: 1px solid #CCC;
     padding: 10px;
+    margin: auto;
+    max-width: 400px;
 }
 
 .cart-itm {
     margin-right: 240px;
     text-align: right;
 }
-/* login.php */
-.loginform form {
+
+.my-form {
     display: flex;
-    flex-direction: column; /* Stack elements vertically */
+    flex-direction: column; 
     align-items: center;
     background: #fff;
     border: 1px solid #ccc;
@@ -298,81 +293,51 @@ p {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     overflow: hidden;
     width: 300px; 
-    margin: 0 auto; 
+    margin: 0 auto;
     padding: 10px;
 }
-
-.loginform input[type="text"],
-.loginform input[type="password"] {
-    border: 1px solid #ccc; /* Add 1px #ccc border to input fields */
+.my-form label {
+    font-weight: bold;
+    margin-left: 10px; 
+    text-align: left;
+}
+.my-form select {
+    border: 1px solid #ccc;
     padding: 10px;
     border-radius: 5px;
     font-size: 16px;
     outline: none;
     width: 90%;
-    text-align: left; 
-}
-
-/* login button */
-.loginform button {
-    margin-top: 8px;
-    background: #007bff;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s;
-}
-
-.loginform button:hover {
-    background: #0056b3;
-}
-
-/* Apply styles to form labels */
-.loginform label {
-    font-weight: bold;
-    margin-left: 10px; 
-    text-align: left; 
-}
-/* registration form */
-.registration-form {
-    display: flex;
-    flex-direction: column; /* Stack elements vertically */
-    align-items: center;
-    background: #fff;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    overflow: hidden;
-    width: 300px; /* Set the desired width for the form */
-    margin: 0 auto; /* Center the form horizontally */
-    padding: 10px;
-}
-
-/*  labels */
-.registration-form label {
-    font-weight: bold;
-    margin-left: 10px; 
     text-align: left;
+    margin-top: 8px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
-
-/*  input fields */
-.registration-form input[type="text"],
-.registration-form input[type="email"],
-.registration-form input[type="password"] {
-    border: 1px solid #ccc; /* Add 1px #ccc border to input fields */
+.my-form input[type="text"],
+.my-form input[type="email"],
+.my-form input[type="password"] {
+    border: 1px solid #ccc;
     padding: 10px;
     border-radius: 5px;
     font-size: 16px;
     outline: none;
-    width: 90%; /* Make the input fields fill the width of the form */
-    text-align: right; /* Align input fields to the right */
-    margin-bottom: 10px; /* Add space between input fields */
+    width: 90%; 
+    text-align: left;
+    margin-bottom: 10px; 
 }
+.my-form textarea {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+    width: 90%; 
+    text-align: left;
+    margin-bottom: 10px; 
+    height: 150px;
 
-/* registration button */
-.registration-form button {
+}
+.my-form button {
     background: #007bff;
     color: #fff;
     border: none;
@@ -380,8 +345,8 @@ p {
     border-radius: 5px;
     cursor: pointer;
     transition: background 0.3s;
+    margin-top: 10px;
 }
-
-.registration-form button:hover {
+.my-form button:hover {
     background: #0056b3;
 }

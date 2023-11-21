@@ -9,13 +9,14 @@ require 'header.php';
 <p>Some greeting message</p>
 <?php require 'config.php'; ?>
 <?php
+    // All products
     // $statment = $pdo->query("SELECT ProductID, ProductName, Description, Price, ImageURL FROM products"); // All products
     // $products = $statment->fetchAll(PDO::FETCH_ASSOC); 
-    ?>
-    <?php
+?>
+<?php
         $statment = $pdo->query("SELECT ProductID, ProductName, Description, Price, ImageURL FROM products ORDER BY RAND() LIMIT 5"); //5 random products
         $products = $statment->fetchAll(PDO::FETCH_ASSOC);
-    ?>
+?>
 
 <div class="product-cards">
         <?php foreach ($products as $product): ?>
@@ -39,3 +40,5 @@ require 'header.php';
 // include footer
 require 'footer.php';
 ?>
+</body>
+</html>

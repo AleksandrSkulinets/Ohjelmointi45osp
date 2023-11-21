@@ -1,6 +1,6 @@
 <?php
-require 'header.php'; // Start the session in header
-require 'config.php'; // Include the database connection
+require 'header.php'; 
+require 'config.php'; 
 
 // Check if the user is logged in
 if (!isset($_SESSION['user'])) {
@@ -8,56 +8,50 @@ if (!isset($_SESSION['user'])) {
     exit();
 }
 
-$user = $_SESSION['user']; // Retrieve user data from the session
+$user = $_SESSION['user']; // Retrieve user data from session
 
-// Handle form submission to update user information
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user_id = $user['UserID'];
+    // htmlspecialchars helping prevent user input from XSS
     $first_name = htmlspecialchars($_POST['first_name']);
     $last_name = htmlspecialchars($_POST['last_name']);
     $email = htmlspecialchars($_POST['email']);
     $address = htmlspecialchars($_POST['address']);
-    $password = htmlspecialchars($_POST['password']); // add  password hashing
+    $password = htmlspecialchars($_POST['password']);
+     
+    //password hashing
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
     $statement = $pdo->prepare("UPDATE users SET FirstName = :first_name, LastName = :last_name, Email = :email, Address = :address, Password = :password WHERE UserID = :user_id");
     $statement->bindParam(':first_name', $first_name, PDO::PARAM_STR);
     $statement->bindParam(':last_name', $last_name, PDO::PARAM_STR);
     $statement->bindParam(':email', $email, PDO::PARAM_STR);
     $statement->bindParam(':address', $address, PDO::PARAM_STR);
-    $statement->bindParam(':password', $password, PDO::PARAM_STR);
+    $statement->bindParam(':password', $hashedPassword, PDO::PARAM_STR); //hashed pass store
     $statement->bindParam(':user_id', $user_id, PDO::PARAM_INT);
 
     if ($statement->execute()) {
-        // Update the session data with the new information
+        // Update the session data
         $_SESSION['user']['FirstName'] = $first_name;
         $_SESSION['user']['LastName'] = $last_name;
         $_SESSION['user']['Email'] = $email;
         $_SESSION['user']['Address'] = $address;
 
-        // Display a success message
-        $success = "User information updated successfully.";
+        header("Location: user.php");
+        exit();
     } else {
-        // Error handling for the update operation
+        // Error update operation
         $error = "Failed to update user info.";
     }
 }
+
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Profile</title>
-</head>
-<body>
     <main>
         <h1>User Profile</h1>
-        <?php if (isset($error)) { echo "<p>$error</p>"; } ?>
-        <?php if (isset($success)) { echo "<p>$success</p>"; header("Location: user.php"); } ?>
-        
-        <div class="loginform">
-            <form method="post" action="user.php" class="custom-form">
+        <?php if (isset($error)) { echo "<p>" . htmlspecialchars($error, ENT_QUOTES, 'UTF-8') . "</p>";} ?>        
+        <div class="custom-form">
+            <form method="post" action="user.php" class="my-form">
                 <label for="first_name">First Name:</label>
                 <input type="text" id="first_name" name="first_name" value="<?php echo $user['FirstName']; ?>" required>
                 
@@ -73,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password" required>
 
-                <button type="submit">Update Information</button>
+                <button type="submit">Update</button>
             </form>
         </div>
         
