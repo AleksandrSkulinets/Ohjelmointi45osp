@@ -6,36 +6,34 @@ function getAllProducts() {
     $statement = $pdo->query("SELECT ProductID, ProductName, Description, Price, ImageURL FROM products");
     return $statement->fetchAll(PDO::FETCH_ASSOC);
 }
-
-function sortProducts($sort) {
-    global $pdo;
-
-    $validSort = ['price_asc', 'price_desc', 'name_asc', 'name_desc'];
-    if (!in_array($sort, $validSort)) {
-        $sort = 'price_asc';
-    }
-
-    $orderBy = '';
-
-    switch ($sort) {
+//sort
+function productSort($products, $sortOption) {
+    switch ($sortOption) {
         case 'price_asc':
-            $orderBy = 'Price ASC';
+            usort($products, function($a, $b) {
+                return $a['Price'] - $b['Price'];
+            });
             break;
         case 'price_desc':
-            $orderBy = 'Price DESC';
+            usort($products, function($a, $b) {
+                return $b['Price'] - $a['Price'];
+            });
             break;
         case 'name_asc':
-            $orderBy = 'ProductName ASC';
+            usort($products, function($a, $b) {
+                return strcmp($a['ProductName'], $b['ProductName']);
+            });
             break;
         case 'name_desc':
-            $orderBy = 'ProductName DESC';
+            usort($products, function($a, $b) {
+                return strcmp($b['ProductName'], $a['ProductName']);
+            });
             break;
+        // Add more cases if needed
     }
 
-    $statement = $pdo->query("SELECT ProductID, ProductName, Description, Price, ImageURL FROM products ORDER BY $orderBy");
-    return $statement->fetchAll(PDO::FETCH_ASSOC);
+    return $products;
 }
-
 
 function getProductDetails($pdo) {
     $selectedProduct = null;

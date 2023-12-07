@@ -1,20 +1,23 @@
 <!-- index  -->
 <?php addToCart(); 
 
-$sort = isset($_GET['sort']) ? $_GET['sort'] : 'price_asc';
-$products = sortProducts($sort);
+if (isset($_POST['sort'])) {
+    $sortOption = $_POST['sort'];
+    $products = productSort($products, $sortOption);
+}
+
 
 ?>
 <h2>Products catalog</h2>
 
 <!-- sorting form -->
-<form action="<?php echo $sitePath; ?>" method="get">
-    <label for="sort">Sort products:</label>
+<form method="post" class="sort-form">
+    <label for="sort">Sort by:</label>
     <select name="sort" id="sort" onchange="this.form.submit()">
-        <option value="price_asc" <?php echo ($sort === 'price_asc') ? 'selected' : ''; ?>>Price Ascending</option>
-        <option value="price_desc" <?php echo ($sort === 'price_desc') ? 'selected' : ''; ?>>Price Descending</option>
-        <option value="name_asc" <?php echo ($sort === 'name_asc') ? 'selected' : ''; ?>>Name A-Z</option>
-        <option value="name_desc" <?php echo ($sort === 'name_desc') ? 'selected' : ''; ?>>Name Z-A</option>
+        <option value="price_asc">Price (Low to High)</option>
+        <option value="price_desc">Price (High to Low)</option>
+        <option value="name_asc">Name (A to Z)</option>
+        <option value="name_desc">Name (Z to A)</option>
     </select>
 </form>
 

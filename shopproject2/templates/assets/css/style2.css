@@ -400,3 +400,15 @@ footer .postnord img {
 .cart-form input[type="submit"]:hover {
     background-color: #004289;
 }
+.sort-form {
+    margin-bottom: 20px;
+}
+
+.sort-form label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.sort-form select {
+    padding: 5px;
+}
