@@ -99,13 +99,13 @@ main h1, main h2, main h3, main p {
   }
 
 main table {
-    width: 80%;
-    margin: 20px auto;
+    width: 75%;
+    margin: auto;
     border-collapse: collapse;
 }
 
 main th, td {
-    padding: 12px;
+    padding: 1em;
     border: 1px solid #c5c5c5;
     text-align: left;
 }
@@ -118,6 +118,18 @@ main th {
 main tr:nth-child(even) {
     background-color: #e6e6e6;
 }
+td img{
+    max-width: 150px;
+    max-height: auto;
+    margin: auto;
+}
+
+table tr td.orderitems
+{
+ text-align:left;
+ font-size: 12px;
+}
+
 .cart-form {
     max-width: 80%;
     align-items: right;
@@ -299,15 +311,25 @@ footer p {
 footer a:hover {
     color: #0056b3;
 }
-footer .payment-logos {
+footer .logos {
+    margin: 2em;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
 }
 
-footer img {
-    width: 50px; 
-    margin: 0 10px; 
+
+footer .payments img {
+    width: 3em;
+    margin:auto 0.2em; 
+}
+footer .delivery img {
+    width: 5em; 
+    margin:auto 0.5em; 
+}
+footer .postnord img {
+    width: 7em; 
+    margin:auto 0.5em; 
 }
 
 .search-container {
@@ -339,7 +361,7 @@ footer img {
 }
 
 .search-form input[type="text"]:focus {
-    width: 250px;
+    width: 200px;
     border: none;
     outline: none;
     background-color: #FFF; 
@@ -377,15 +399,4 @@ footer img {
 
 .cart-form input[type="submit"]:hover {
     background-color: #004289;
-}
-td img{
-    max-width: 150px;
-    max-height: auto;
-    margin: auto;
-}
-
-table tr td.orderitems
-{
- text-align:left;
- font-size: 12px;
 }
