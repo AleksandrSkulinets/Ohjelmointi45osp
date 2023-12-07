@@ -13,7 +13,7 @@ $error = updateUserProfile($pdo, $user);
     <h2>User Profile</h2>
     <?php if (isset($error)) { echo "<p>" . sanitizeInput($error) . "</p>"; } ?>
     <div class="custom-form">
-        <form method="post" action="profile.php" class="my-form">
+        <form method="post" action="" class="my-form">
             <label for="first_name">First Name:</label>
             <input type="text" id="first_name" name="first_name" value="<?php echo $user['FirstName']; ?>" required>
 

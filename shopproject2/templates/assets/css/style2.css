@@ -1,0 +1,391 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+    font-family: 'fontsawsam', sans-serif;
+    background-color: #fff; 
+    color: #495057;
+    max-width: 1200px; 
+    margin: 0 auto; 
+}
+
+
+header {
+    background-color: #c3c3c3; 
+    color: #fff;
+    text-align: center;
+    padding: 0;
+}
+
+header h1 {
+    padding-top: 1em;
+    font-family: 'Bebas Neue', sans-serif; 
+    font-size: 3.3em;
+    font-weight: 1400;
+    color: transparent;
+    background: url('https://upload.wikimedia.org/wikipedia/commons/6/62/Starsinthesky.jpg');
+    background-size: cover;
+    -webkit-background-clip: text;
+    background-clip: text;
+    letter-spacing: 0.2em;
+  }
+
+nav {
+    background-color: #c3c3c3;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 1em;
+    
+}
+
+nav ul li {
+    display: inline-block; 
+    margin: 2vh;
+
+}
+
+nav a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 1.4em;
+    font-weight: bold;
+    text-decoration: none; 
+    color: #ffffff; 
+}
+
+
+nav a:hover {
+    color: #ddd; 
+    text-decoration: none;
+}
+
+nav img {
+    width: 40px; 
+    height: auto; 
+    padding-top: 1vh;
+    margin-right: 1vh;
+}
+nav a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: #0056b3; 
+}
+
+
+main {
+    padding: 20px;
+    min-height: 60em; 
+    height: auto;
+}
+ 
+main h1, main h2, main h3, main p {
+    text-align: center;
+    margin: 2vh auto;
+  }
+
+main table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+}
+
+main th, td {
+    padding: 12px;
+    border: 1px solid #c5c5c5;
+    text-align: left;
+}
+
+main th {
+    background-color: #9a9a9a;
+    color: #fff;
+}
+
+main tr:nth-child(even) {
+    background-color: #e6e6e6;
+}
+.cart-form {
+    max-width: 80%;
+    align-items: right;
+    margin: auto;
+}
+.product-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.product-card {
+    max-width: 400px;
+    width: 100%;
+    border: 1px solid #d7d7d7;
+    text-align: center;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 10px; 
+}
+.product-card a {
+    text-decoration: none;
+    color: #0056b3;
+
+}
+.product-card img {
+    max-width: 100%;
+    height: auto;
+    margin: 1em auto;
+}
+
+.product-details {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #d7d7d7;
+    text-align: center;
+    border-radius: 10px; 
+}
+.product-details img {
+    max-width: 100%;
+    height: auto;
+    margin: 1em auto;
+}
+.product-details a{
+    text-decoration: none;
+}
+.add-to-cart-form {
+    margin-top: 10px;
+}
+
+.quantity-input {
+    width: 50px;
+    height: 30px;
+    font-size: 16px;
+    border: 1px solid #d7d7d7;
+    border-radius: 10px;
+    outline: none;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.quantity-input:focus {
+    border-color: #0056b3;
+}
+
+.add-to-cart-button {
+    background: linear-gradient(#6ca6e4, #0056b3); 
+    color: #fff;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+    border-radius: 10px;
+}
+
+.add-to-cart-button:hover {
+    background: linear-gradient(#6ca6e4, #003366); 
+}
+.custom-form {
+    background: #FFF;
+    padding: 10px;
+    margin: auto;
+    max-width: 400px;
+}
+.my-form {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    width: 300px; 
+    margin: 0 auto;
+    padding: 10px;
+}
+.my-form label {
+    font-weight: bold;
+    margin-left: 10px; 
+    text-align: left;
+}
+.my-form select {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+    width: 90%;
+    text-align: left;
+    margin-top: 8px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.my-form input[type="text"],
+.my-form input[type="email"],
+.my-form input[type="password"] {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+    width: 90%; 
+    text-align: left;
+    margin-bottom: 10px; 
+}
+.my-form textarea {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+    width: 90%; 
+    text-align: left;
+    margin-bottom: 10px; 
+    height: 150px;
+
+}
+.my-form button {
+    background: linear-gradient(#6ca6e4, #0056b3); 
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-top: 10px;
+}
+.my-form button:hover {
+    background: linear-gradient(#6ca6e4, #003366); 
+}
+
+footer {
+    background-color: #a6a6a6;
+    color: #fff;
+    text-align: center;
+    padding: 3em 0;
+    
+}
+
+footer ul li {
+    display: inline-block; 
+    text-decoration: none;
+    margin: 1em auto;
+}
+
+footer a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    padding: 10px;
+    transition: color 0.3s;
+}
+footer p {
+    margin-top: 3em;
+}
+
+footer a:hover {
+    color: #0056b3;
+}
+footer .payment-logos {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+footer img {
+    width: 50px; 
+    margin: 0 10px; 
+}
+
+.search-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start; 
+    margin: 2vh;
+}
+
+
+.search-form {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+.search-form input[type="text"] {
+    width: 75px;
+    flex: 1;
+    border: none;
+    transition: width 0.5s;
+    margin-right: 10px;
+    padding: 10px;
+    border-radius: 10px; 
+}
+
+.search-form input[type="text"]:focus {
+    width: 250px;
+    border: none;
+    outline: none;
+    background-color: #FFF; 
+}
+
+.search-form input[type="submit"] {
+    font-style: bold;
+    margin: 2px;
+    padding: 10px;
+    border: none;
+    outline: none; 
+    cursor: pointer;
+    border-radius: 5px;
+    background: linear-gradient(#6ca6e4, #0056b3); 
+}
+
+.cart-form {
+    display: flex;
+    justify-content: flex-end;
+}
+.cart-itm {
+    display: block;
+    align-self: right;
+}
+.cart-form input[type="submit"] {
+    background: linear-gradient(#6ca6e4, #0056b3); 
+    width: 200px; 
+    color: white; 
+    padding: 10px 15px;
+    margin: 10px; 
+    border: none; 
+    border-radius: 10px;
+    cursor: pointer; 
+}
+
+.cart-form input[type="submit"]:hover {
+    background-color: #004289;
+}
+td img{
+    max-width: 150px;
+    max-height: auto;
+    margin: auto;
+}
+
+table tr td.orderitems
+{
+ text-align:left;
+ font-size: 12px;
+}

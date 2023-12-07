@@ -62,16 +62,22 @@ nav a:hover {
 }
 
 nav img {
-    width: 35px; 
+    width: 40px; 
     height: auto; 
     padding-top: 1vh;
-    margin-right: 0.5vh;
+    margin-right: 1vh;
 }
 
 nav span {
-    font-size: 1.4vh;
+    font-size: 1.5vh;
 }
-
+.cart-count {
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    margin-left: 0.3vh;
+    
+}
 
 h1 {
     margin: auto;
@@ -300,7 +306,7 @@ footer a:hover {
 
 .search-form input[type="text"] {
     width: 7vh; 
-    transition: width 0.3s;
+    transition: width 0.5s;
     margin-right: 2vh;
 }
 

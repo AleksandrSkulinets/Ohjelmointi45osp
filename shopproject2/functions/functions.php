@@ -197,7 +197,7 @@ function calculateTotalPrice($cart, $products) {
     return $totalPrice;
 }
 
-// Function make an order
+
 function makeOrder($pdo) {
     if (isset($_SESSION['user']) && !empty($_SESSION['cart'])) {
         if (isset($_POST['make_order'])) {
@@ -248,7 +248,7 @@ function makeOrder($pdo) {
                 // Increment OrderItemID
                 $newOrderItemID++;
             }
-            // Remove items from cart after an order
+            // Remove items from cart after order
             unset($_SESSION['cart']);
 
             echo '<p>Thank you for your order, ' . $_SESSION['user']['FirstName'] . '.</p>';
@@ -266,7 +266,7 @@ function makeOrder($pdo) {
 
 function handleLogin($pdo) {
     if (isset($_SESSION['user'])) {
-        header("Location: ?page=profile"); // Redirect to profile 
+        header("Location: ?page=profile"); // Redirect to profile if logged in
         exit();
     }
 
@@ -324,19 +324,20 @@ function updateUserProfile($pdo, $user) {
         $statement->bindParam(':user_id', $user_id, PDO::PARAM_INT);
 
         if ($statement->execute()) {
-            // Update session data
+            
             $_SESSION['user']['FirstName'] = $first_name;
             $_SESSION['user']['LastName'] = $last_name;
             $_SESSION['user']['Email'] = $email;
             $_SESSION['user']['Address'] = $address;
 
-            return null; // Success
+            header('Location: ?page=profile');
+            exit();
         } else {
-            // Error update 
+            
             return "Failed to update user info.";
         }
     }
-    return null; // No error to display
+    return null; 
 }
 
 function handleRegistration($pdo) {
@@ -348,25 +349,34 @@ function handleRegistration($pdo) {
         $email = $_POST['email'];
         $password = $_POST['password'];
         $address = $_POST['address']; 
-        // pass hashing
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-        // Calculate next UserID
-        $statement = $pdo->prepare("SELECT MAX(UserID) AS maxUserID FROM users");
-        $statement->execute();
-        $result = $statement->fetch();
-        $nextUserID = $result['maxUserID'] + 1;
-        // Set UserType Customer by default
-        $userType = 'Customer';
-        // Insert into database
-        $statement = $pdo->prepare("INSERT INTO users (UserID, FirstName, LastName, Password, Email, Address, UserType) VALUES (?, ?, ?, ?, ?, ?, ?)");
-        $insertSuccess = $statement->execute([$nextUserID, $firstName, $lastName, $hashedPassword, $email, $address, $userType]);
-        if ($insertSuccess) {
-            // Registration successful redirect to profile
-            header("Location: ?page=profile");
-            exit();
+        // Check if user with the same email already exists
+        $existingUserStatement = $pdo->prepare("SELECT UserID FROM users WHERE Email = ?");
+        $existingUserStatement->execute([$email]);
+        $existingUser = $existingUserStatement->fetch();
+
+        if ($existingUser) {
+            $registrationError = "User with this email is already registered.";
         } else {
-            $registrationError = "Registration failed.";
+            // Calculate next UserID
+            $statement = $pdo->prepare("SELECT MAX(UserID) AS maxUserID FROM users");
+            $statement->execute();
+            $result = $statement->fetch();
+            $nextUserID = $result['maxUserID'] + 1;
+            // UserType Customer by default
+            $userType = 'Customer';
+            // Insert into database
+            $insertStatement = $pdo->prepare("INSERT INTO users (UserID, FirstName, LastName, Password, Email, Address, UserType) VALUES (?, ?, ?, ?, ?, ?, ?)");
+            $insertSuccess = $insertStatement->execute([$nextUserID, $firstName, $lastName, $hashedPassword, $email, $address, $userType]);
+
+            if ($insertSuccess) {
+                // Registration successful, redirect to profile
+                header("Location: ?page=profile");
+                exit();
+            } else {
+                $registrationError = "Registration failed.";
+            }
         }
     }
 
@@ -374,7 +384,7 @@ function handleRegistration($pdo) {
 }
 
 function searchProducts($pdo, $query) {
-    
+
     if (strlen($query) < 3) {    
         return [];
     }

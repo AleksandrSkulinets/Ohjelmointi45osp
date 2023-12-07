@@ -32,11 +32,11 @@ switch ($page) {
         if (isset($_SESSION['user'])) {
             include 'templates/profile.php';
         } else {
-                // Redirect to login page if not loggedin
-                header("Location: ?page=login");
-                exit();
-            }
-            break;
+            // Redirect to login page if not loggedin
+            header("Location: ?page=login");
+            exit();
+        }
+        break;
 
     case 'login':
             $error = handleLogin($pdo);
@@ -51,31 +51,30 @@ switch ($page) {
         }
 
     case 'register':
-            // Check if user is already loggedin
-            if (isset($_SESSION['user'])) {
-                header("Location: ?page=profile");
-                exit();
-            }
+        // Check if user is already loggedin
+        if (isset($_SESSION['user'])) {
+            header("Location: ?page=profile");
+            exit();
+        }
     
-            $registrationError = handleRegistration($pdo);
-            include 'templates/register.php';
-            break;
+        $registrationError = handleRegistration($pdo);
+        include 'templates/register.php';
+        break;
 
-            case 'search':
-                if (isset($_GET['query'])) {
-                    $searchQuery = sanitizeInput($_GET['query']);
-            
-                    if (strlen($searchQuery) >= 3) {
-                        $searchResults = searchProducts($pdo, $searchQuery);
-            
-                        include 'templates/search.php';
-                    } else {
-                        echo "<h2>Search query must be at least 3 characters long.</h2>";
-                    }
+    case 'search':
+        if (isset($_GET['query'])) {
+            $searchQuery = sanitizeInput($_GET['query']);
+            if (strlen($searchQuery) >= 3) {
+                    $searchResults = searchProducts($pdo, $searchQuery);
+                    include 'templates/search.php';
                 } else {
-                    echo "<h2>No search specified.</h2>";
+                        echo "<h2>Search query must be at least 3 characters long.</h2>";
                 }
-                break;
+
+            } else {
+                    echo "<h2>No search specified.</h2>";
+            }
+            break;
 
     default:
         // 404 error
