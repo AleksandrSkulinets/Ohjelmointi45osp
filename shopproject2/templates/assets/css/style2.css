@@ -98,6 +98,10 @@ main h1, main h2, main h3, main p {
     margin: 2vh auto;
   }
 
+main a:hover {
+    color: #012f5f; 
+}
+
 main table {
     width: 75%;
     margin: auto;
@@ -105,7 +109,7 @@ main table {
 }
 
 main th, td {
-    padding: 1em;
+    padding: 0.7em;
     border: 1px solid #c5c5c5;
     text-align: left;
 }
@@ -131,7 +135,7 @@ table tr td.orderitems
 }
 
 .cart-form {
-    max-width: 80%;
+    max-width: 75%;
     align-items: right;
     margin: auto;
 }
@@ -311,6 +315,7 @@ footer p {
 footer a:hover {
     color: #0056b3;
 }
+
 footer .logos {
     margin: 2em;
     display: flex;
@@ -388,7 +393,7 @@ footer .postnord img {
 }
 .cart-form input[type="submit"] {
     background: linear-gradient(#6ca6e4, #0056b3); 
-    width: 200px; 
+    width: 16em; 
     color: white; 
     padding: 10px 15px;
     margin: 10px; 
@@ -398,7 +403,7 @@ footer .postnord img {
 }
 
 .cart-form input[type="submit"]:hover {
-    background-color: #004289;
+    background-color: #022e5d;
 }
 .sort-form {
     margin-bottom: 20px;

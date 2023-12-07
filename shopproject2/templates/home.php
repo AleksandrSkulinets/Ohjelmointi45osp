@@ -20,7 +20,7 @@ if (isset($_POST['sort'])) {
         <option value="name_desc">Name (Z to A)</option>
     </select>
 </form>
-
+<!-- product cards -->
 <div class="product-cards">
         <?php foreach ($products as $product): ?>
             <div class="product-card">
