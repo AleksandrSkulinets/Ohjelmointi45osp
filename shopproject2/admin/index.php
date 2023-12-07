@@ -2,7 +2,11 @@
 require 'admin-header.php';
 
 ?>
-<h2>Here will be some information, or infographics</h2>
+<main>
+<h2>Here will be some information about orders, or infographics</h2>
+</main>
+</body>
+</html>
 
 
 

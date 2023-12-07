@@ -33,6 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     ?>
     <!-- add new product form -->
+    <main>
     <h2>Add New Product</h2>
     <div class="custom-form">
     <form method="post" action="" class="my-form">
