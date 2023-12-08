@@ -1,7 +1,7 @@
 <?php
 require 'admin-header.php';
 
-// Fetching all products from the database
+// Fetching all products from database
 $statement = $pdo->query("SELECT * FROM products");
 $products = $statement->fetchAll(PDO::FETCH_ASSOC);
 
@@ -21,19 +21,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header("Location: products.php");
         exit();
     }
-} 
-if (isset($_GET['delete_product'])) {
-    // Removing a product
-    $productId = $_GET['delete_product'];
+    elseif(isset($_POST['delete_product']) && isset($_POST['delete_product_id'])) {
+        // Removing a product
+        $productId = $_POST['delete_product_id'];
+        try {
+           
+            $deleteStatement = $pdo->prepare("DELETE FROM Products WHERE ProductID=?");
+            $deleteStatement->execute([$productId]);
 
-    // Prepare the delete statement
-    $deleteStatement = $pdo->prepare("DELETE FROM products WHERE ProductID=?");
-    $deleteStatement->execute([$productId]);
+            
+            $rowCount = $deleteStatement->rowCount();
 
-    // Redirect to prevent form resubmission
-    header("Location: products.php");
-    exit();
+            if ($rowCount > 0) {
+                // Product successfully deleted
+                header("Location: products.php");
+                exit();
+            } else {
+                // Product not found or not deleted
+                echo "Product not found or could not be deleted.";
+            }
+        } catch (PDOException $e) {
+            // Handle errors
+            echo "Error: " . $e->getMessage();
+        }
+    }
 }
+
 ?>
 
 <main>
@@ -65,10 +78,10 @@ if (isset($_GET['delete_product'])) {
                 </form>
             </td>
             <td>
-                <form method="get" action="products.php">
-                    <input type="hidden" name="delete_product" value="<?php echo $product['ProductID']; ?>">
-                    <button type="submit" name="delete_product">Delete Product</button>
-                </form>
+            <form method="post" action="products.php">
+            <input type="hidden" name="delete_product_id" value="<?php echo $product['ProductID']; ?>">
+            <button type="submit" name="delete_product">Delete Product</button>
+            </form>
             </td>
         </tr>
     <?php endforeach; ?>
