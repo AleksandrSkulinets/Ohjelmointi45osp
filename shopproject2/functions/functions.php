@@ -3,9 +3,11 @@ $sitePath = "/shopproject2";
 
 function getAllProducts() {
     global $pdo; 
+   // $statement = $pdo->query("SELECT ProductID, ProductName, Description, Price, ImageURL FROM products ORDER BY RAND() LIMIT 5"); //5 random products  
     $statement = $pdo->query("SELECT ProductID, ProductName, Description, Price, ImageURL FROM products");
     return $statement->fetchAll(PDO::FETCH_ASSOC);
 }
+
 //sort
 function productSort($products, $sortOption) {
     
