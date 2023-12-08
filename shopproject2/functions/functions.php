@@ -8,6 +8,7 @@ function getAllProducts() {
 }
 //sort
 function productSort($products, $sortOption) {
+    
     switch ($sortOption) {
         case 'price_asc':
             usort($products, function($a, $b) {
@@ -29,7 +30,6 @@ function productSort($products, $sortOption) {
                 return strcmp($b['ProductName'], $a['ProductName']);
             });
             break;
-        // Add more cases if needed
     }
 
     return $products;
@@ -203,25 +203,21 @@ function makeOrder($pdo) {
             $products = $statement->fetchAll(PDO::FETCH_ASSOC);
             // Calculate total price 
             $totalPrice = calculateTotalPrice($_SESSION['cart'], $products);
-            // Find the maximum OrderID
-            $maxOrderIDQuery = $pdo->query("SELECT MAX(OrderID) AS max_order_id FROM orders");
-            $maxOrderIDRow = $maxOrderIDQuery->fetch(PDO::FETCH_ASSOC);
-            // New OrderID
-            if ($maxOrderIDRow) {
-                $newOrderID = (int)$maxOrderIDRow['max_order_id'] + 1;
-            } else {
-                // Case when no existing orders
-                $newOrderID = 1;
-            }
+
             // Create new order in 'orders'
             $userID = $_SESSION['user']['UserID'];
             $orderDate = date('Y-m-d H:i:s'); 
             $status = 'Pending'; //Pending as the default
-            $insertO = $pdo->prepare("INSERT INTO orders (OrderID, UserID, OrderDate, Status, TotalPrice) VALUES (?, ?, ?, ?, ?)");
-            $insertO->execute([$newOrderID, $userID, $orderDate, $status, $totalPrice]);
+            $insertO = $pdo->prepare("INSERT INTO orders (UserID, OrderDate, Status, TotalPrice) VALUES (?, ?, ?, ?)");
+            $insertO->execute([$userID, $orderDate, $status, $totalPrice]);
+
+            // Get the auto-incremented OrderID
+            $newOrderID = $pdo->lastInsertId();
+
             // Find maximum OrderItemID 
             $maxOrderItemIDQuery = $pdo->query("SELECT MAX(OrderItemID) AS max_order_item_id FROM orderitems");
             $maxOrderItemIDRow = $maxOrderItemIDQuery->fetch(PDO::FETCH_ASSOC);
+            
             // New OrderItemID
             if ($maxOrderItemIDRow) {
                 $newOrderItemID = (int)$maxOrderItemIDRow['max_order_item_id'] + 1;
@@ -229,6 +225,7 @@ function makeOrder($pdo) {
                 // When no existing 'orderitems'
                 $newOrderItemID = 1;
             }
+            
             $insertOI = $pdo->prepare("INSERT INTO orderitems (OrderItemID, OrderID, ProductID, Quantity, Subtotal) VALUES (?, ?, ?, ?, ?)");
 
             foreach ($_SESSION['cart'] as $productID => $quantity) {
@@ -246,21 +243,26 @@ function makeOrder($pdo) {
                 // Increment OrderItemID
                 $newOrderItemID++;
             }
+            
             // Remove items from cart after order
             unset($_SESSION['cart']);
 
             echo '<p>Thank you for your order, ' . $_SESSION['user']['FirstName'] . '.</p>';
             echo '<p>Your order id is ' . $newOrderID . ' order price is €' . $totalPrice . '.</p>';
+            
             // print links
             echo '<p><a href="?page=cart">Back to Cart</a></p>' . "<p>or</p>" . '<p><a href="index.php">Home Page</a></p>';
         }
-        // Display the "Make Order" button
+        
+        // Display "Make Order" button
         echo '<div class="cart-itm">';
         echo "<form class='cart-form' method='post' action='?page=cart'>";
         echo "<input type='submit' name='make_order' value='Make an order'>";
         echo "</form></div>";
     }
 }
+
+
 
 function handleLogin($pdo) {
     if (isset($_SESSION['user'])) {

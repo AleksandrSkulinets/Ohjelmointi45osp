@@ -1,28 +1,36 @@
 <!-- index  -->
 <?php addToCart(); 
 
+
+$sortOption = isset($_SESSION['sortOption']) ? $_SESSION['sortOption'] : 'default';
+
+// update the sort option if submitted form
 if (isset($_POST['sort'])) {
     $sortOption = $_POST['sort'];
-    $products = productSort($products, $sortOption);
+    $_SESSION['sortOption'] = $sortOption;
 }
 
-
+$sortedProducts = productSort($products, $sortOption);
 ?>
+
+
 <h2>Products catalog</h2>
 
 <!-- sorting form -->
+
 <form method="post" class="sort-form">
     <label for="sort">Sort by:</label>
     <select name="sort" id="sort" onchange="this.form.submit()">
-        <option value="price_asc">Price (Low to High)</option>
-        <option value="price_desc">Price (High to Low)</option>
-        <option value="name_asc">Name (A to Z)</option>
-        <option value="name_desc">Name (Z to A)</option>
+        <option value="price_asc" <?php echo ($sortOption === 'price_asc') ? 'selected' : ''; ?>>Price (Low to High)</option>
+        <option value="price_desc" <?php echo ($sortOption === 'price_desc') ? 'selected' : ''; ?>>Price (High to Low)</option>
+        <option value="name_asc" <?php echo ($sortOption === 'name_asc') ? 'selected' : ''; ?>>Name (A to Z)</option>
+        <option value="name_desc" <?php echo ($sortOption === 'name_desc') ? 'selected' : ''; ?>>Name (Z to A)</option>
     </select>
 </form>
+
 <!-- product cards -->
 <div class="product-cards">
-        <?php foreach ($products as $product): ?>
+    <?php foreach ($sortedProducts as $product): ?>
             <div class="product-card">
             <h2><a href="<?php echo $sitePath; ?>/?page=product&id=<?php echo $product['ProductID']; ?>"><?php echo $product['ProductName']; ?></a></h2>
                 <img src="<?php echo $product['ImageURL']; ?>" alt="<?php echo $product['ProductName']; ?>">
@@ -34,5 +42,5 @@ if (isset($_POST['sort'])) {
                     <input type="submit" class="add-to-cart-button" value="Add to Cart">
                 </form>
             </div>
-        <?php endforeach; ?>
+    <?php endforeach; ?>
 </div>
