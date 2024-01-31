@@ -1,0 +1,11 @@
+.products {
+    margin: auto;
+    max-width: 1200px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.shop-title{
+    display: flex;
+    margin: 2rem ;
+}
